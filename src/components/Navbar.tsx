@@ -3,6 +3,7 @@ import { MaxWidthWrapper } from "@/components/MaxWidthWrapper"
 import { SignOutButton } from "@clerk/nextjs"
 import { Button, buttonVariants } from "./ui/button"
 import { ArrowRight } from "lucide-react"
+import { Icons } from "./Icons"
 
 export const Navbar = () => {
   const user = false
@@ -11,8 +12,11 @@ export const Navbar = () => {
     <nav className="sticky z-[100] h-16 inset-x-0 top-0 w-full border-b boder-gray-200 bg-white/80 backdrop-blur-lg transition-all">
       <MaxWidthWrapper>
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex z-40 font-semibold">
-            Notification<span className="text-brand-700">Z</span>
+          <Link href="/" className="flex items-center gap-2 z-40 font-semibold">
+            <Icons.logo className="size-12" />
+            <span>
+              Notification<span className="text-brand-700">Z</span>
+            </span>
           </Link>
 
           <div className="h-full flex items-center space-x-4">
