@@ -1,6 +1,8 @@
 import Link from "next/link"
 import { MaxWidthWrapper } from "@/components/MaxWidthWrapper"
 import { SignOutButton } from "@clerk/nextjs"
+import { Button, buttonVariants } from "./ui/button"
+import { ArrowRight } from "lucide-react"
 
 export const Navbar = () => {
   const user = false
@@ -13,7 +15,63 @@ export const Navbar = () => {
             Notification<span className="text-brand-700">Z</span>
           </Link>
 
-          <div className="h-full flex items-center space-x-4"></div>
+          <div className="h-full flex items-center space-x-4">
+            {user ? (
+              <>
+                <SignOutButton>
+                  <Button size="sm" variant="ghost">
+                    Sign Out
+                  </Button>
+                </SignOutButton>
+
+                <Link
+                  href="/dashboard"
+                  className={buttonVariants({
+                    size: "sm",
+                    className: "flex items-center gap-1",
+                  })}
+                >
+                  Dashboard <ArrowRight className="size-4" />
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/pricing"
+                  className={buttonVariants({
+                    size: "sm",
+                    variant: "ghost",
+                  })}
+                >
+                  Pricing
+                </Link>
+
+                <Link
+                  href="/sign-in"
+                  className={buttonVariants({
+                    size: "sm",
+                    variant: "ghost",
+                  })}
+                >
+                  Sign In
+                </Link>
+
+                <div className="h-8 w-px bg-gray-200" />
+
+                <Link
+                  href="/sign-up"
+                  className={buttonVariants({
+                    size: "sm",
+                    variant: "default",
+                    className: "flex items-center gap-1",
+                  })}
+                >
+                  Sign Up
+                  <ArrowRight className="size-4" />
+                </Link>
+              </>
+            )}
+          </div>
         </div>
       </MaxWidthWrapper>
     </nav>
