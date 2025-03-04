@@ -3,6 +3,11 @@ import { Heading } from "@/components/Heading"
 import { MaxWidthWrapper } from "@/components/MaxWidthWrapper"
 import { ShinyButton } from "@/components/ShinyButton"
 import { MockDiscordUI } from "@/components/MockDiscordUI"
+import {
+  AnimatedList,
+  AnimatedListItem,
+} from "@/components/magicui/animated-list"
+import { DiscordMessage } from "@/components/DiscordMessage"
 
 const Page = () => {
   return (
@@ -58,7 +63,32 @@ const Page = () => {
         <div className="relative mx-auto">
           <MaxWidthWrapper className="relative">
             <div className="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4">
-              <MockDiscordUI></MockDiscordUI>
+              <MockDiscordUI>
+                <AnimatedList>
+                  <DiscordMessage
+                    username="NotificationZ"
+                    timestamp="Today at 12:00 PM "
+                    badgeText="SignUp"
+                    badgeColor="#43b581"
+                    title="🥳 New user signed up"
+                    content={{
+                      name: "Sebastian Mihalache",
+                      email: "seb.mih@gmail.com",
+                    }}
+                  />
+                  <DiscordMessage
+                    username="NotificationZ"
+                    timestamp="Today at 12:00 PM "
+                    badgeText="Revenue"
+                    badgeColor="#faa61a"
+                    title="💰 Payment Successful"
+                    content={{
+                      amount: "$100.00",
+                      email: "chris.mih@gmail.com",
+                    }}
+                  />
+                </AnimatedList>
+              </MockDiscordUI>
             </div>
           </MaxWidthWrapper>
         </div>
