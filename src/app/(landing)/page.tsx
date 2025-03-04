@@ -1,5 +1,7 @@
-import { Heading } from "./components/Heading"
-import { MaxWidthWrapper } from "./components/MaxWidthWrapper"
+import { Check } from "lucide-react"
+import { Heading } from "@/app/components/Heading"
+import { MaxWidthWrapper } from "@/app/components/MaxWidthWrapper"
+import { ShinyButton } from "@/app/components/ShinyButton"
 
 const Page = () => {
   return (
@@ -24,7 +26,28 @@ const Page = () => {
               </span>{" "}
               sent directly to your Discord.
             </p>
-            ul
+
+            <ul className="space-y-2 text-base/7 text-gray-600 text-left flex flex-col items-start">
+              {[
+                "Real-time Discord alerts for critical events",
+                "Buy once, use forever",
+                "Track sales, new users or any other event",
+              ].map((item, index) => {
+                return (
+                  <li
+                    key={index}
+                    className="flex gap-1.5 items-center text-left"
+                  >
+                    <Check className="size-5 shrink-0 text-brand-700" />
+                    {item}
+                  </li>
+                )
+              })}
+            </ul>
+
+            <div className="w-full max-w-80">
+              <ShinyButton href="/sign-up">Start for free Today</ShinyButton>
+            </div>
           </div>
         </MaxWidthWrapper>
       </section>
