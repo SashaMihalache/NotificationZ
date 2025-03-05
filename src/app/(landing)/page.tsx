@@ -8,6 +8,8 @@ import {
   AnimatedListItem,
 } from "@/components/magicui/animated-list"
 import { DiscordMessage } from "@/components/DiscordMessage"
+import Image from "next/image"
+import { BentoGrid } from "@/components/BentoGrid"
 
 const Page = () => {
   return (
@@ -78,13 +80,25 @@ const Page = () => {
                   />
                   <DiscordMessage
                     username="NotificationZ"
-                    timestamp="Today at 12:00 PM "
+                    timestamp="Today at 12:05lkijihugytfrdeswaq    PM "
                     badgeText="Revenue"
                     badgeColor="#faa61a"
                     title="💰 Payment Successful"
                     content={{
                       amount: "$100.00",
                       email: "chris.mih@gmail.com",
+                      plan: "PRO",
+                    }}
+                  />
+                  <DiscordMessage
+                    username="NotificationZ"
+                    timestamp="Today at 14:24 PM "
+                    badgeText="Milestone"
+                    badgeColor="#5a65f2"
+                    title="🚀 Revenue Milestone Achieved"
+                    content={{
+                      recurringRevenue: "$520.00",
+                      growth: "+50%",
                     }}
                   />
                 </AnimatedList>
@@ -94,7 +108,10 @@ const Page = () => {
         </div>
       </section>
 
-      <section></section>
+      <section className="relative py-24 sm:py-32 bg-brand-25">
+        <BentoGrid />
+      </section>
+
       <section></section>
     </>
   )
