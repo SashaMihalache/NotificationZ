@@ -1,4 +1,4 @@
-import { Check } from "lucide-react"
+import { Check, Star } from "lucide-react"
 import { Heading } from "@/components/Heading"
 import { MaxWidthWrapper } from "@/components/MaxWidthWrapper"
 import { ShinyButton } from "@/components/ShinyButton"
@@ -10,6 +10,7 @@ import {
 import { DiscordMessage } from "@/components/DiscordMessage"
 import Image from "next/image"
 import { BentoGrid } from "@/components/BentoGrid"
+import { Icons } from "@/components/Icons"
 
 const Page = () => {
   return (
@@ -112,7 +113,95 @@ const Page = () => {
         <BentoGrid />
       </section>
 
-      <section></section>
+      <section className="relative py-24 sm:py-32 bg-white">
+        <MaxWidthWrapper className="flex flex-col items-center gap-16 sm:gap-20">
+          <div>
+            <h2 className="text-center text-base/7 font-semibold text-brand-600">
+              Real-World Experiences
+            </h2>
+            <Heading className="text-center">What Our Customers Say</Heading>
+          </div>
+
+          <div className="mx-auto grid max-w-2xl grid-cols-1 px-4 lg:mx-0 lg:max-w-none lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-gray-200">
+            <div className="flex flex-auto flex-col gap-4 bg-brand-25 p-6 sm:p-8 lg:p-16 rounded-t-[2rem] lg:rounded-tr-none lg:rounded-l-[2rem]">
+              <div className="flex gap-0.5 mb-2 justify-center lg:justify-start">
+                <Star className="size-5 text-brand-600 fill-brand-600" />
+                <Star className="size-5 text-brand-600 fill-brand-600" />
+                <Star className="size-5 text-brand-600 fill-brand-600" />
+                <Star className="size-5 text-brand-600 fill-brand-600" />
+                <Star className="size-5 text-brand-600 fill-brand-600" />
+              </div>
+
+              <p className="text-base sm:text-lg lg:text-lg/8 font-medium tracking-tight text-brand-950 text-center lg:text-left text-pretty">
+                NotificationZ has been a game changer for our team. We are now
+                able to monitor our SaaS in real-time and react to critical
+                events instantly. The Discord integration is seamless and the
+                notifications are delivered in a timely manner.
+              </p>
+
+              <div className="flex flex-col justify-center lg:justify-start sm:flex-row items-center sm:items-start gap-4 mt-2">
+                <Image
+                  src="/user-2.png"
+                  className="rounded-full object-cover"
+                  alt="Michaela Larson"
+                  width={48}
+                  height={48}
+                />
+
+                <div className="flex flex-col items-center sm:items-start">
+                  <p className="font-semibold flex items-center">
+                    Michaela Larson
+                    <Icons.verificationBadge className="size-4 inline-block  ml-1.5" />
+                  </p>
+                  <p className="text-sm text-gray-600">@michaela_larson</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-auto flex-col gap-4 bg-brand-25 p-6 sm:p-8 lg:p-16 rounded-b-[2rem] lg:rounded-bl-none lg:rounded-r-[2rem]">
+              <div className="flex gap-0.5 mb-2 justify-center lg:justify-start">
+                <Star className="size-5 text-brand-600 fill-brand-600" />
+                <Star className="size-5 text-brand-600 fill-brand-600" />
+                <Star className="size-5 text-brand-600 fill-brand-600" />
+                <Star className="size-5 text-brand-600 fill-brand-600" />
+                <Star className="size-5 text-brand-600 fill-brand-600" />
+              </div>
+
+              <p className="text-base sm:text-lg lg:text-lg/8 font-medium tracking-tight text-brand-950 text-center lg:text-left text-pretty">
+                I have been using NotificationZ for a few months now and I am
+                very happy with the results. The product is easy to use and the
+                notifications are delivered in real-time. I would recommend
+                NotificationZ to any SaaS owner looking to monitor their
+                business.
+              </p>
+
+              <div className="flex flex-col justify-center lg:justify-start sm:flex-row items-center sm:items-start gap-4 mt-2">
+                <Image
+                  src="/user-1.png"
+                  className="rounded-full object-cover"
+                  alt="Albertho Mihalache"
+                  width={48}
+                  height={48}
+                />
+
+                <div className="flex flex-col items-center sm:items-start">
+                  <p className="font-semibold flex items-center">
+                    Albertho Mihalache
+                    <Icons.verificationBadge className="size-4 inline-block  ml-1.5" />
+                  </p>
+                  <p className="text-sm text-gray-600">@albertho</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ShinyButton
+            href="/sign-up"
+            className="relative z-10 h-14 w-full max-w-xs text-base shadow-lg transition-shadow duration-300 hover:shadow-xl"
+          >
+            Start For Free Today
+          </ShinyButton>
+        </MaxWidthWrapper>
+      </section>
     </>
   )
 }

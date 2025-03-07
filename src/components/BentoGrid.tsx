@@ -135,8 +135,8 @@ export const BentoGrid = () => {
                 Easy Integration
               </p>
               <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
-                Connect PingPanda with your existing workflows in minutes and
-                call our intuitive logging API from any language.
+                Connect NotificationZ with your existing workflows in minutes
+                and call our intuitive logging API from any language.
               </p>
             </div>
 
@@ -145,7 +145,7 @@ export const BentoGrid = () => {
                 <div className="flex bg-gray-800/40 ring-1 ring-white/5">
                   <div className="-mb-px flex text-sm/6 font-medium text-gray-400">
                     <div className="border-b border-r border-b-white/20 border-r-white/10 bg-white/5 px-4 py-2 text-white">
-                      pingpanda.js
+                      notificationz.js
                     </div>
                   </div>
                 </div>
