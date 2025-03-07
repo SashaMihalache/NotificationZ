@@ -4,34 +4,38 @@ import { currentUser } from "@clerk/nextjs/server"
 import { HTTPException } from "hono/http-exception"
 
 const authMiddleware = j.middleware(async ({ c, next }) => {
-  return next({})
-  // const authHeader = c.req.header("Authorization")
+  const authHeader = c.req.header("Authorization")
 
-  // if (authHeader) {
-  //   const apiKey = authHeader.split(" ")[1] // bearer <API_KEY>
+  if (authHeader) {
+    // Bearer <token>
+    const apiKey = authHeader.split(" ")[1]
 
-  //   const user = await db.user.findUnique({
-  //     where: { apiKey },
-  //   })
+    const user = await db.user.findUnique({
+      where: {
+        apiKey,
+      },
+    })
 
-  //   if (user) return next({ user })
-  // }
+    if (user) {
+      return next({ user })
+    }
+  }
 
-  // const auth = await currentUser()
+  const auth = await currentUser()
 
-  // if (!auth) {
-  //   throw new HTTPException(401, { message: "Unauthorized" })
-  // }
+  if (!auth) {
+    throw new HTTPException(401, { message: "Unauthorized" })
+  }
 
-  // const user = await db.user.findUnique({
-  //   where: { externalId: auth.id },
-  // })
+  const user = await db.user.findUnique({
+    where: { externalId: auth.id },
+  })
 
-  // if (!user) {
-  //   throw new HTTPException(401, { message: "Unauthorized" })
-  // }
+  if (!user) {
+    throw new HTTPException(401, { message: "Unauthorized" })
+  }
 
-  // return next({ user })
+  return next({ user })
 })
 
 /**
