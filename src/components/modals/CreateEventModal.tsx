@@ -48,31 +48,33 @@ export const CreateEventModal = ({ children }: PropsWithChildren) => {
   const [isOpen, setIsOpen] = useState(false)
   const queryClient = useQueryClient()
 
-  const { mutate: createEventCategory } = useMutation({
-    mutationFn: async (data: EventCategoryForm) => {
-      await client.category.createEventCategory.$post(data)
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["user-event-categories"] })
-      setIsOpen(false)
-    },
-  })
-
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
     setValue,
+    reset,
   } = useForm<EventCategoryForm>({
     resolver: zodResolver(EVENT_CATEGORY_VALIDATOR),
+  })
+
+  const { mutate: createEventCategory, isPending } = useMutation({
+    mutationFn: async (data: EventCategoryForm) => {
+      await client.category.createEventCategory.$post(data)
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["user-event-categories"] })
+      reset()
+      setIsOpen(false)
+    },
   })
 
   const color = watch("color")
   const selectedEmoji = watch("emoji")
 
   const onSubmit = async (data: EventCategoryForm) => {
-    createEventCategory(data)
+    await createEventCategory(data)
   }
 
   return (
@@ -114,7 +116,7 @@ export const CreateEventModal = ({ children }: PropsWithChildren) => {
 
             <div>
               <Label htmlFor="color">Color</Label>
-              <div className="flex flex-wrap gap-5">
+              <div className="flex flex-wrap gap-3">
                 {COLOR_OPTIONS.map((premadeColor) => (
                   <button
                     type="button"
@@ -170,11 +172,15 @@ export const CreateEventModal = ({ children }: PropsWithChildren) => {
             <Button
               type="button"
               variant={"outline"}
+              className={cn(isPending ? "opacity-50" : "")}
               onClick={() => setIsOpen(false)}
+              disabled={isPending}
             >
               Cancel
             </Button>
-            <Button type="submit">Create Category</Button>
+            <Button type="submit">
+              {isPending ? "Creating..." : "Create Category"}
+            </Button>
           </div>
         </form>
       </Modal>
