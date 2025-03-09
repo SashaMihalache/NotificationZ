@@ -116,4 +116,39 @@ export const categoryRouter = router({
 
       return c.json({ eventCategory })
     }),
+
+  insertQuickstartCategories: privateProcedure.mutation(async ({ c, ctx }) => {
+    const { user } = ctx
+
+    await db.eventCategory.createMany({
+      data: [
+        {
+          name: "Work",
+          color: parseColor("#FFD700"),
+          emoji: "💼",
+          userId: user.id,
+        },
+        {
+          name: "Personal",
+          color: parseColor("#FF6347"),
+          emoji: "🏠",
+          userId: user.id,
+        },
+        {
+          name: "Health",
+          color: parseColor("#20B2AA"),
+          emoji: "🏋️",
+          userId: user.id,
+        },
+        {
+          name: "Finance",
+          color: parseColor("#FF4500"),
+          emoji: "💰",
+          userId: user.id,
+        },
+      ],
+    })
+
+    return c.superjson({ success: true })
+  }),
 })

@@ -44,7 +44,14 @@ const EMOJI_OPTIONS = [
 
 type EventCategoryForm = z.infer<typeof EVENT_CATEGORY_VALIDATOR>
 
-export const CreateEventModal = ({ children }: PropsWithChildren) => {
+interface CategoryEventModal extends PropsWithChildren {
+  containerClassName?: string
+}
+
+export const CreateEventModal = ({
+  children,
+  containerClassName,
+}: CategoryEventModal) => {
   const [isOpen, setIsOpen] = useState(false)
   const queryClient = useQueryClient()
 
@@ -79,7 +86,9 @@ export const CreateEventModal = ({ children }: PropsWithChildren) => {
 
   return (
     <>
-      <div onClick={() => setIsOpen(true)}>{children}</div>
+      <div className={containerClassName} onClick={() => setIsOpen(true)}>
+        {children}
+      </div>
       <Modal
         className="max-w-xl p-8"
         showModal={isOpen}
