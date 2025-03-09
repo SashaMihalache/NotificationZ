@@ -1,7 +1,4 @@
-import {
-  DashboardContainer,
-  DashboardPage,
-} from "@/app/dashboard/DashboardPage"
+import { DashboardPage } from "@/app/dashboard/DashboardPage"
 import { DashboardContent } from "@/components/content/DashboardContent"
 import { CreateEventModal } from "@/components/modals/CreateEventModal"
 import { Button } from "@/components/ui/button"
