@@ -1,4 +1,7 @@
-import { DashboardContainer } from "@/components/containers/DashboardContainer"
+import {
+  DashboardContainer,
+  DashboardPage,
+} from "@/app/dashboard/DashboardPage"
 import { DashboardContent } from "@/components/content/DashboardContent"
 import { CreateEventModal } from "@/components/modals/CreateEventModal"
 import { Button } from "@/components/ui/button"
@@ -24,7 +27,7 @@ const Page = async () => {
   }
 
   return (
-    <DashboardContainer
+    <DashboardPage
       cta={
         <CreateEventModal>
           <Button className="w-full sm:w-fit">
@@ -36,7 +39,7 @@ const Page = async () => {
       title="Dashboard"
     >
       <DashboardContent />
-    </DashboardContainer>
+    </DashboardPage>
   )
 }
 

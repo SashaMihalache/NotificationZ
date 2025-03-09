@@ -3,8 +3,12 @@ import { router } from "../__internals/router"
 import { privateProcedure } from "../procedures"
 import { startOfMonth } from "date-fns"
 import { z } from "zod"
-import { EVENT_CATEGORY_VALIDATOR } from "@/lib/validators/category-validator"
+import {
+  CATEGORY_NAME_VALIDATOR,
+  EVENT_CATEGORY_VALIDATOR,
+} from "@/lib/validators/category-validator"
 import { parseColor } from "@/utils"
+import { HTTPException } from "hono/http-exception"
 
 export const categoryRouter = router({
   getEventCategories: privateProcedure.query(async ({ c, ctx }) => {
@@ -151,4 +155,34 @@ export const categoryRouter = router({
 
     return c.superjson({ success: true })
   }),
+
+  pollCategory: privateProcedure
+    .input(z.object({ name: CATEGORY_NAME_VALIDATOR }))
+    .query(async ({ c, input, ctx }) => {
+      const { name } = input
+
+      const category = await db.eventCategory.findUnique({
+        where: {
+          name_userId: {
+            name,
+            userId: ctx.user.id,
+          },
+        },
+        include: {
+          _count: {
+            select: {
+              events: true,
+            },
+          },
+        },
+      })
+
+      if (!category) {
+        throw new HTTPException(404, { message: `Category ${name} not found` })
+      }
+
+      const hasEvents = category._count.events > 0
+
+      return c.json({ hasEvents })
+    }),
 })
