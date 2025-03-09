@@ -3,6 +3,8 @@ import { router } from "../__internals/router"
 import { privateProcedure } from "../procedures"
 import { startOfMonth } from "date-fns"
 import { z } from "zod"
+import { EVENT_CATEGORY_VALIDATOR } from "@/lib/validators/category-validator"
+import { parseColor } from "@/utils"
 
 export const categoryRouter = router({
   getEventCategories: privateProcedure.query(async ({ c, ctx }) => {
@@ -93,5 +95,25 @@ export const categoryRouter = router({
       })
 
       return c.superjson({ success: true })
+    }),
+
+  createEventCategory: privateProcedure
+    .input(EVENT_CATEGORY_VALIDATOR)
+    .mutation(async ({ c, input, ctx }) => {
+      const { user } = ctx
+      const { color, name, emoji } = input
+
+      // TODO: add plan logic
+
+      const eventCategory = await db.eventCategory.create({
+        data: {
+          name: name.toLowerCase(),
+          color: parseColor(color),
+          emoji,
+          userId: user.id,
+        },
+      })
+
+      return c.json({ eventCategory })
     }),
 })
